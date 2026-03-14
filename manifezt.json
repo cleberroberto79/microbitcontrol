@@ -1,0 +1,9 @@
+{
+    "name": "Controle Micro:bit Prof. Cleber",
+    "short_name": "Ctrl micro:bit",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#1a237e",
+    "theme_color": "#283593",
+    "orientation": "portrait"
+}
