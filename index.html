@@ -4,8 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Controle Micro:bit - Prof. Cleber</title>
+    
+    <!-- MANIFEST PWA -->
     <link rel="manifest" href="manifest.json">
+    
+    <!-- FAVICON - ÍCONE DA ABA (ROBÔ) -->
+    <link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAB80lEQVRYhcWXMUgDMRiFX0RRpLiIiyAiKIiCg4uDgyCCg4OLg4OLgyAoig6KoiAoujg4iItQEAVBEBRxEEQcXBxERMQiIg6C0FIqYr8Ml5JLL2kv6QcP7pJc/r8vISFNaZr29vbCGJPP5/Ng+vr6TkIId7Va7U0d9Ho9uF6vD6fT6RgMBveZTOYxnU4/TqfTH7qFcw8PDxCdTCafjDEoFotQKpV+bFyhUIBUKgWpVAoajQb0ej1oNpsQBAFUKhUYj8fQ7/eBc+5tLpFIQBRFMBgMQNfA7u4uHB4eHgngnEOxWITZbAaz2QwURQFCCHDOoV6vw3Q6hXK5DIvFAqrVqjNgPB5Ds9mEfD4Pi8XCmW42m0Gj0QDTgO4E+rY3EAQsFgtYr9dQKpVgPp9DoVAARVFgOp0CAJBKpUBVVZhOpyAIAqTTaZhMJsBai/b7PZRKJeCcQ6fTgX6/70y33+9hNBpBPp+HIAic6YQQB8M2AdZafwPJZBKYmE6n0G63IR6Pw2q1AgCAaDQK29vbkMlkIJvNwmg0gvF4DPl8HobDITDGIBaLQa1Wg81mAwCwt7cHjUYDVqsVxONxaLVaXgbb7bTkcjkQQggfA9FoFBaLhSldKpX6FIT/0j9DY2PjN0IIwI26mU0kEsd4PH4Nw/B6Pp97X2caY4vF4j2VSn3+J/0Ck+8lKJ8Dp+4AAAAASUVORK5CYII=">
+    <link rel="icon" type="image/png" sizes="16x16" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAABcElEQVQ4jY1TPUvDUBQ9qWjRVhAnF0EUBBcXBxdBcBAHF8FBHBzEzU0QFAcXR0EQBQVxEBcXQRBBEBRxEEQQh7pZBBFEBBGR4qCYtMV4EmzapL4wCOTe8+7LuefD2Gw2UalUEAQB4vE4tFotFosF6vU6rFYrstksBoMB5vM5er0eJpMJqtUqptMpBoMBRqMRjEYjptMpBEEQEZjNZiRJQhAEeL1eiKIoIiiKIuFwGFEUwWg0IplMolarodlsotlsIhaLIZFIoNVqYTabQVVVEEIwnU5hMpkgiiK63S5UVQ2Jw2g0Aq01UqkUJEnCbrcL2QuCAFmW4fV6oWka5vM5er0edF2H3+8H5xyKosBisSCTyWAymWxN4JzD6/ViOp0il8tBURTYbLZ/FIIgoNlsotfrwWazgXMOXdehKAp0XUexWMT7+ztGoxEMw4CqqhAEAaIoQpZlyLKMfr+P6XSK0WgETdOg6/q3N6ZpYjgcYr1eA4BQKpXQaDQQBAGy2SxsNtsf4gvU2TZbipZ5TQAAAABJRU5ErkJggg==">
+    
+    <!-- APPLE TOUCH ICON (para iOS) -->
+    <link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAB80lEQVRYhcWXMUgDMRiFX0RRpLiIiyAiKIiCg4uDgyCCg4OLg4OLgyAoig6KoiAoujg4iItQEAVBEBRxEEQcXBxERMQiIg6C0FIqYr8Ml5JLL2kv6QcP7pJc/r8vISFNaZr29vbCGJPP5/Ng+vr6TkIId7Va7U0d9Ho9uF6vD6fT6RgMBveZTOYxnU4/TqfTH7qFcw8PDxCdTCafjDEoFotQKpV+bFyhUIBUKgWpVAoajQb0ej1oNpsQBAFUKhUYj8fQ7/eBc+5tLpFIQBRFMBgMQNfA7u4uHB4eHgngnEOxWITZbAaz2QwURQFCCHDOoV6vw3Q6hXK5DIvFAqrVqjNgPB5Ds9mEfD4Pi8XCmW42m0Gj0QDTgO4E+rY3EAQsFgtYr9dQKpVgPp9DoVAARVFgOp0CAJBKpUBVVZhOpyAIAqTTaZhMJsBai/b7PZRKJeCcQ6fTgX6/70y33+9hNBpBPp+HIAic6YQQB8M2AdZafwPJZBKYmE6n0G63IR6Pw2q1AgCAaDQK29vbkMlkIJvNwmg0gvF4DPl8HobDITDGIBaLQa1Wg81mAwCwt7cHjUYDVqsVxONxaLVaXgbb7bTkcjkQQggfA9FoFBaLhSldKpX6FIT/0j9DY2PjN0IIwI26mU0kEsd4PH4Nw/B6Pp97X2caY4vF4j2VSn3+J/0Ck+8lKJ8Dp+4AAAAASUVORK5CYII=">
+    
     <style>
+        /* ===== RESET E CONFIGURAÇÕES GLOBAIS ===== */
         * {
             margin: 0;
             padding: 0;
@@ -16,7 +27,7 @@
         html, body {
             width: 100%;
             min-height: 100vh;
-            min-height: -webkit-fill-available; /* Para Safari mobile */
+            min-height: -webkit-fill-available;
             background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
         }
 
@@ -28,33 +39,33 @@
         }
 
         .container {
-            max-width: 1400px;
+            max-width: 1200px;
             width: 100%;
             height: 100%;
-            max-height: 95vh;
+            max-height: 98vh;
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
             border-radius: 30px;
-            padding: 16px;
+            padding: 12px;
             box-shadow: 0 20px 40px rgba(0,0,0,0.3);
             border: 1px solid rgba(255,255,255,0.2);
             display: flex;
             flex-direction: column;
         }
 
-        /* Cabeçalho com Badge */
+        /* ===== CABEÇALHO ===== */
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             flex-wrap: wrap;
             flex-shrink: 0;
         }
 
         h1 {
             color: white;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 600;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
@@ -68,12 +79,13 @@
         .badge {
             background: #ff6d00;
             color: white;
-            padding: 6px 12px;
+            padding: 5px 10px;
             border-radius: 50px;
             font-weight: bold;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             animation: pulse 2s infinite;
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            white-space: nowrap;
         }
 
         @keyframes pulse {
@@ -82,15 +94,21 @@
             100% { transform: scale(1); }
         }
 
-        /* Status Bluetooth */
+        .fullscreen-controls {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        /* ===== STATUS BLUETOOTH ===== */
         .status-area {
             background: rgba(0,0,0,0.2);
             border-radius: 16px;
-            padding: 10px 14px;
-            margin-bottom: 15px;
+            padding: 8px 12px;
+            margin-bottom: 12px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             color: white;
             border-left: 5px solid #f44336;
             flex-shrink: 0;
@@ -101,11 +119,12 @@
         }
 
         .status-indicator {
-            width: 14px;
-            height: 14px;
+            width: 12px;
+            height: 12px;
             border-radius: 50%;
             background: #f44336;
             transition: all 0.3s;
+            flex-shrink: 0;
         }
 
         .connected .status-indicator {
@@ -116,35 +135,38 @@
         .status-text {
             flex: 1;
             font-weight: 500;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
-        /* LAYOUT PRINCIPAL - OCUPA ESPAÇO RESTANTE */
+        /* ===== LAYOUT PRINCIPAL ===== */
         .main-controls {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 12px;
             flex: 1;
-            min-height: 0; /* Importante para flexbox */
+            min-height: 0;
         }
 
-        /* Para telas grandes ou em landscape */
         @media (min-width: 768px) and (orientation: landscape) {
             .main-controls {
                 flex-direction: row;
-                gap: 20px;
+                gap: 15px;
             }
         }
 
-        /* Seção de Controle: WASD + Botão Central */
+        /* ===== SEÇÃO WASD ===== */
         .control-section {
             background: rgba(0,0,0,0.2);
-            border-radius: 25px;
-            padding: 15px 10px;
+            border-radius: 20px;
+            padding: 12px 8px;
             flex: 1;
             display: flex;
             flex-direction: column;
             min-height: 0;
+            overflow: hidden;
         }
 
         .section-title {
@@ -152,7 +174,7 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             font-size: 0.8rem;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             font-weight: 300;
             text-align: center;
             flex-shrink: 0;
@@ -163,7 +185,7 @@
             font-size: 0.7rem;
             margin-left: 5px;
             background: rgba(0,0,0,0.3);
-            padding: 3px 6px;
+            padding: 2px 5px;
             border-radius: 20px;
             display: inline-block;
         }
@@ -171,25 +193,25 @@
         .wasd-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
+            gap: 6px;
             justify-items: center;
             align-items: center;
             width: 100%;
-            max-width: 280px;
+            max-width: 260px;
             margin: 0 auto;
             flex: 1;
         }
 
         .btn-wasd {
             width: 100%;
+            max-width: 80px;
             aspect-ratio: 1 / 1;
-            max-width: 90px;
             border: none;
-            border-radius: 20px;
+            border-radius: 16px;
             background: #3949ab;
-            box-shadow: 0 6px 0 #1a237e, 0 8px 12px rgba(0,0,0,0.3);
+            box-shadow: 0 5px 0 #1a237e, 0 6px 10px rgba(0,0,0,0.3);
             color: white;
-            font-size: clamp(1.5rem, 5vw, 2.5rem);
+            font-size: clamp(1.3rem, 4vw, 2rem);
             font-weight: bold;
             cursor: pointer;
             transition: all 0.07s ease;
@@ -198,12 +220,11 @@
             align-items: center;
             justify-content: center;
             line-height: 1;
-            position: relative;
         }
 
         .btn-wasd:active, .btn-wasd.key-press {
-            transform: translateY(6px);
-            box-shadow: 0 0 0 #1a237e, 0 5px 8px rgba(0,0,0,0.3);
+            transform: translateY(5px);
+            box-shadow: 0 0 0 #1a237e, 0 4px 6px rgba(0,0,0,0.3);
             background: #5c6bc0;
         }
 
@@ -218,47 +239,42 @@
         }
 
         .btn-wasd .arrow-icon {
-            font-size: clamp(1.8rem, 6vw, 2.8rem);
+            font-size: clamp(1.5rem, 5vw, 2.2rem);
             line-height: 1;
         }
 
-        /* Botão Central (X) */
         .btn-center {
             background: #FFA000;
-            box-shadow: 0 6px 0 #b26500, 0 8px 12px rgba(0,0,0,0.3);
+            box-shadow: 0 5px 0 #b26500, 0 6px 10px rgba(0,0,0,0.3);
         }
 
         .btn-center .center-dot {
-            font-size: clamp(2rem, 7vw, 3rem);
+            font-size: clamp(1.8rem, 6vw, 2.5rem);
             line-height: 1;
         }
 
-        /* Seção dos Números */
+        /* ===== SEÇÃO NUMÉRICA ===== */
         .numbers-section {
             background: rgba(0,0,0,0.2);
-            border-radius: 25px;
-            padding: 15px 10px;
+            border-radius: 20px;
+            padding: 12px 8px;
             flex: 1;
             display: flex;
             flex-direction: column;
             min-height: 0;
-            border-top: 2px solid rgba(255,255,255,0.2);
-            border-bottom: 2px solid rgba(255,255,255,0.2);
+            overflow: hidden;
         }
 
         @media (min-width: 768px) and (orientation: landscape) {
             .numbers-section {
-                border-top: none;
-                border-bottom: none;
                 border-left: 2px solid rgba(255,255,255,0.2);
-                border-right: 2px solid rgba(255,255,255,0.2);
             }
         }
 
         .num-grid {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 6px;
             align-items: center;
             justify-content: center;
             flex: 1;
@@ -267,7 +283,7 @@
 
         .num-row {
             display: flex;
-            gap: 8px;
+            gap: 6px;
             justify-content: center;
             flex-wrap: wrap;
             width: 100%;
@@ -275,14 +291,14 @@
 
         .btn-num {
             width: 100%;
-            max-width: 80px;
+            max-width: 70px;
             aspect-ratio: 1 / 1;
             border: none;
-            border-radius: 18px;
+            border-radius: 16px;
             background: #5e35b1;
-            box-shadow: 0 6px 0 #311b92, 0 8px 12px rgba(0,0,0,0.3);
+            box-shadow: 0 5px 0 #311b92, 0 6px 10px rgba(0,0,0,0.3);
             color: white;
-            font-size: clamp(1.8rem, 6vw, 2.5rem);
+            font-size: clamp(1.5rem, 5vw, 2rem);
             font-weight: bold;
             cursor: pointer;
             transition: all 0.07s ease;
@@ -292,39 +308,38 @@
         }
 
         .btn-num:active, .btn-num.key-press {
-            transform: translateY(6px);
-            box-shadow: 0 0 0 #1a237e, 0 5px 8px rgba(0,0,0,0.3);
+            transform: translateY(5px);
+            box-shadow: 0 0 0 #1a237e, 0 4px 6px rgba(0,0,0,0.3);
             filter: brightness(1.2);
         }
 
         .btn-num.feedback-sent {
             background-color: #2e7d32 !important;
-            box-shadow: 0 6px 0 #1b5e20 !important;
+            box-shadow: 0 5px 0 #1b5e20 !important;
         }
 
-        /* Cores personalizadas por linha */
-        .num-row:nth-child(1) .btn-num { background: #2e7d32; box-shadow: 0 6px 0 #1b5e20; }
-        .num-row:nth-child(2) .btn-num { background: #ff6f00; box-shadow: 0 6px 0 #b26500; }
-        .num-row:nth-child(3) .btn-num { background: #6a1b9a; box-shadow: 0 6px 0 #38006b; }
-        #btn-zero { background: #0288d1; box-shadow: 0 6px 0 #01579b; }
-        #btn-zero.btn-num { max-width: calc(80px * 2 + 8px); } /* Botão 0 maior */
+        .num-row:nth-child(1) .btn-num { background: #2e7d32; box-shadow: 0 5px 0 #1b5e20; }
+        .num-row:nth-child(2) .btn-num { background: #ff6f00; box-shadow: 0 5px 0 #b26500; }
+        .num-row:nth-child(3) .btn-num { background: #6a1b9a; box-shadow: 0 5px 0 #38006b; }
+        #btn-zero { background: #0288d1; box-shadow: 0 5px 0 #01579b; }
+        #btn-zero.btn-num { max-width: calc(70px * 2 + 6px); }
 
-        /* Botões de ação */
+        /* ===== BOTÕES DE AÇÃO ===== */
         .action-buttons {
             display: flex;
             gap: 8px;
             flex-wrap: wrap;
-            margin: 12px 0;
+            margin: 10px 0;
             flex-shrink: 0;
         }
 
         .btn-action {
             flex: 1;
-            min-width: 100px;
-            padding: 12px 8px;
+            min-width: 90px;
+            padding: 10px 6px;
             border: none;
-            border-radius: 14px;
-            font-size: 0.9rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
             font-weight: bold;
             color: white;
             cursor: pointer;
@@ -332,8 +347,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 5px;
+            gap: 4px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            white-space: nowrap;
         }
 
         .btn-action.connect { background: #4caf50; }
@@ -343,16 +359,16 @@
 
         .btn-action:active { transform: scale(0.97); }
 
-        /* Painel de Logs */
+        /* ===== PAINEL DE LOGS ===== */
         .log-panel {
             background: #0a0f1e;
-            border-radius: 16px;
-            padding: 10px;
-            margin-bottom: 10px;
-            max-height: 80px;
+            border-radius: 14px;
+            padding: 8px;
+            margin-bottom: 8px;
+            max-height: 70px;
             overflow-y: auto;
             font-family: 'Courier New', monospace;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: #00ff9d;
             border: 1px solid #2a2f3e;
             flex-shrink: 0;
@@ -363,38 +379,39 @@
             border-bottom: 1px solid #1a1f2e;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 4px;
         }
 
         .log-time { color: #ffaa00; }
-        .log-icon { font-size: 0.9rem; }
+        .log-icon { font-size: 0.8rem; }
         .log-msg { word-break: break-word; }
 
-        /* Dicas Android */
+        /* ===== DICAS ANDROID ===== */
         .android-tip {
             background: #311b92;
-            border-radius: 14px;
-            padding: 8px 12px;
-            margin-bottom: 8px;
+            border-radius: 12px;
+            padding: 6px 10px;
+            margin-bottom: 6px;
             color: #cfd8ff;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             border-left: 4px solid #ff6d00;
             flex-shrink: 0;
         }
 
-        /* Rodapé */
+        /* ===== RODAPÉ ===== */
         .footer {
             text-align: center;
             color: rgba(255,255,255,0.7);
-            font-size: 0.8rem;
-            padding: 8px;
+            font-size: 0.75rem;
+            padding: 6px;
             background: rgba(0,0,0,0.2);
-            border-radius: 30px;
+            border-radius: 20px;
             border: 1px solid rgba(255,255,255,0.1);
             flex-shrink: 0;
+            line-height: 1.3;
         }
 
         .footer .professor {
@@ -405,37 +422,39 @@
         .footer .email {
             color: #4fc3f7;
             text-decoration: none;
+            word-break: break-all;
         }
 
-        /* Botão Fullscreen */
-        .fullscreen-controls {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-        }
-
-        /* Mobile pequeno */
+        /* ===== RESPONSIVIDADE PARA TELAS MUITO PEQUENAS ===== */
         @media (max-width: 380px) {
-            .btn-wasd { max-width: 70px; }
-            .btn-num { max-width: 60px; }
-            #btn-zero.btn-num { max-width: calc(60px * 2 + 8px); }
-            h1 { font-size: 1.2rem; }
-            .badge { font-size: 0.8rem; padding: 4px 10px; }
+            .btn-wasd { max-width: 65px; }
+            .btn-num { max-width: 55px; }
+            #btn-zero.btn-num { max-width: calc(55px * 2 + 6px); }
+            h1 { font-size: 1.1rem; }
+            .badge { font-size: 0.7rem; padding: 3px 8px; }
+            .btn-action { font-size: 0.75rem; padding: 8px 4px; }
+        }
+
+        @media (max-width: 320px) {
+            .btn-wasd { max-width: 55px; }
+            .btn-num { max-width: 45px; }
+            #btn-zero.btn-num { max-width: calc(45px * 2 + 6px); }
+            .btn-wasd .key-hint { display: none; }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Cabeçalho -->
+        <!-- CABEÇALHO -->
         <div class="header">
             <h1>🎮 Micro:bit Control</h1>
             <div class="fullscreen-controls">
-                <div class="badge">Professor Cleber</div>
+                <div class="badge">Prof. Cleber</div>
                 <button class="btn-action fullscreen" id="fullscreenBtn" title="Tela Cheia">⛶</button>
             </div>
         </div>
 
-        <!-- Status Bluetooth -->
+        <!-- STATUS BLUETOOTH -->
         <div class="status-area" id="statusArea">
             <div class="status-indicator" id="statusIndicator"></div>
             <div class="status-text" id="statusText">Desconectado</div>
@@ -444,7 +463,7 @@
 
         <!-- LAYOUT PRINCIPAL -->
         <div class="main-controls">
-            <!-- CONTROLE WASD -->
+            <!-- SEÇÃO WASD -->
             <div class="control-section">
                 <div class="section-title">
                     ⏹️ Movimento 
@@ -480,7 +499,7 @@
                 </div>
             </div>
 
-            <!-- BOTÕES NUMÉRICOS -->
+            <!-- SEÇÃO NUMÉRICA -->
             <div class="numbers-section">
                 <div class="section-title">
                     🔢 Números
@@ -509,89 +528,320 @@
             </div>
         </div>
 
-        <!-- Botões de Conexão -->
+        <!-- BOTÕES DE CONEXÃO -->
         <div class="action-buttons">
             <button class="btn-action connect" id="connectBtn">🔗 Conectar</button>
             <button class="btn-action disconnect" id="disconnectBtn" style="display: none;">⛔ Desconectar</button>
-            <button class="btn-action debug" id="debugBtn">🐞 Debug Android</button>
+            <button class="btn-action debug" id="debugBtn">🐞 Debug</button>
         </div>
 
-        <!-- Painel de Logs -->
+        <!-- PAINEL DE LOGS -->
         <div class="log-panel" id="logPanel">
             <div class="log-entry"><span class="log-time">[Sistema]</span> <span class="log-icon">ℹ️</span> <span class="log-msg">Pronto. Clique em Conectar.</span></div>
         </div>
 
-        <!-- Dicas Android -->
+        <!-- DICAS ANDROID -->
         <div class="android-tip">
             <span>📱</span>
-            <span><strong>Tela cheia automática!</strong> A página já ocupa toda a tela. Toque em ⛶ para mais espaço.</span>
+            <span><strong>Android:</strong> Use WASD ou setas no teclado.</span>
         </div>
 
-        <!-- Rodapé -->
+        <!-- RODAPÉ -->
         <div class="footer">
-            <span class="professor">Projeto do professor Cleber</span> · 
-            <a href="mailto:profisicaclebr@gmail.com" class="email">📧 profisicaclebr@gmail.com</a>
-            <br>
-            <small>⌨️ WASD + Setas + Números</small>
+            <span class="professor">Professor Cleber</span> · 
+            <a href="mailto:profisicaclebr@gmail.com" class="email">profisicaclebr@gmail.com</a>
         </div>
     </div>
 
     <script>
         (function() {
-            // ... (todo o código anterior permanece igual) ...
+            // ===== CONFIGURAÇÕES BLUETOOTH =====
+            const UART_SERVICE_UUID = "6e400001-b5a3-f393-e0a9-e50e24dcca9e";
+            const UART_TX_CHARACTERISTIC_UUID = "6e400002-b5a3-f393-e0a9-e50e24dcca9e";
+            const UART_RX_CHARACTERISTIC_UUID = "6e400003-b5a3-f393-e0a9-e50e24dcca9e";
 
-            // ADICIONAR FUNÇÃO DE TELA CHEIA
+            // ===== ESTADO =====
+            let bluetoothDevice = null;
+            let rxCharacteristic = null;
+            let txCharacteristic = null;
+            let gattServer = null;
+            let commandQueue = Promise.resolve();
+            let wakeLock = null;
+
+            // ===== ELEMENTOS DOM =====
+            const statusArea = document.getElementById('statusArea');
+            const statusText = document.getElementById('statusText');
+            const connectBtn = document.getElementById('connectBtn');
+            const disconnectBtn = document.getElementById('disconnectBtn');
+            const debugBtn = document.getElementById('debugBtn');
             const fullscreenBtn = document.getElementById('fullscreenBtn');
-            
-            function toggleFullScreen() {
-                if (!document.fullscreenElement) {
-                    // Entrar em tela cheia
-                    if (document.documentElement.requestFullscreen) {
-                        document.documentElement.requestFullscreen();
-                    } else if (document.documentElement.webkitRequestFullscreen) { /* Safari */
-                        document.documentElement.webkitRequestFullscreen();
-                    } else if (document.documentElement.msRequestFullscreen) { /* IE/Edge */
-                        document.documentElement.msRequestFullscreen();
-                    }
-                    fullscreenBtn.textContent = '✕';
-                    fullscreenBtn.title = 'Sair da Tela Cheia';
-                } else {
-                    // Sair da tela cheia
-                    if (document.exitFullscreen) {
-                        document.exitFullscreen();
-                    } else if (document.webkitExitFullscreen) { /* Safari */
-                        document.webkitExitFullscreen();
-                    } else if (document.msExitFullscreen) { /* IE/Edge */
-                        document.msExitFullscreen();
-                    }
-                    fullscreenBtn.textContent = '⛶';
-                    fullscreenBtn.title = 'Tela Cheia';
+            const logPanel = document.getElementById('logPanel');
+
+            // ===== MAPEAMENTO DE TECLAS =====
+            const keyMap = {
+                'w': { buttonId: 'btn-up', command: 'w' },
+                'a': { buttonId: 'btn-left', command: 'a' },
+                's': { buttonId: 'btn-down', command: 's' },
+                'd': { buttonId: 'btn-right', command: 'd' },
+                'arrowup': { buttonId: 'btn-up', command: 'w' },
+                'arrowdown': { buttonId: 'btn-down', command: 's' },
+                'arrowleft': { buttonId: 'btn-left', command: 'a' },
+                'arrowright': { buttonId: 'btn-right', command: 'd' },
+                'x': { buttonId: 'btn-center', command: 'x' },
+                '0': { buttonId: 'btn-zero', command: '0' },
+                '1': { buttonId: 'btn-1', command: '1' },
+                '2': { buttonId: 'btn-2', command: '2' },
+                '3': { buttonId: 'btn-3', command: '3' },
+                '4': { buttonId: 'btn-4', command: '4' },
+                '5': { buttonId: 'btn-5', command: '5' },
+                '6': { buttonId: 'btn-6', command: '6' },
+                '7': { buttonId: 'btn-7', command: '7' },
+                '8': { buttonId: 'btn-8', command: '8' },
+                '9': { buttonId: 'btn-9', command: '9' }
+            };
+
+            // ===== FUNÇÕES DE LOG =====
+            function addLog(message, type = 'info') {
+                const entry = document.createElement('div');
+                entry.className = 'log-entry';
+                const now = new Date();
+                const timeStr = `[${now.getHours().toString().padStart(2,'0')}:${now.getMinutes().toString().padStart(2,'0')}:${now.getSeconds().toString().padStart(2,'0')}]`;
+                
+                let icon = 'ℹ️';
+                if (type === 'success') icon = '✅';
+                if (type === 'error') icon = '❌';
+                if (type === 'warning') icon = '⚠️';
+                if (type === 'command') icon = '📤';
+                
+                entry.innerHTML = `<span class="log-time">${timeStr}</span> <span class="log-icon">${icon}</span> <span class="log-msg">${message}</span>`;
+                logPanel.appendChild(entry);
+                logPanel.scrollTop = logPanel.scrollHeight;
+                
+                while (logPanel.children.length > 15) {
+                    logPanel.removeChild(logPanel.firstChild);
                 }
             }
 
-            fullscreenBtn.addEventListener('click', toggleFullScreen);
+            // ===== FUNÇÃO DE ENVIO =====
+            function sendCommand(command, source = 'botão') {
+                return new Promise((resolve, reject) => {
+                    if (!rxCharacteristic) {
+                        addLog('Não conectado', 'error');
+                        return reject('Não conectado');
+                    }
 
-            // Detectar mudanças no estado da tela cheia
-            document.addEventListener('fullscreenchange', updateFullscreenButton);
-            document.addEventListener('webkitfullscreenchange', updateFullscreenButton);
-            document.addEventListener('mozfullscreenchange', updateFullscreenButton);
-            document.addEventListener('MSFullscreenChange', updateFullscreenButton);
+                    commandQueue = commandQueue.then(() => {
+                        return (async () => {
+                            try {
+                                addLog(`📤 "${command}" (${source})`, 'command');
+                                
+                                const bytes = [];
+                                for (let i = 0; i < command.length; i++) {
+                                    bytes.push(command.charCodeAt(i));
+                                }
+                                bytes.push(10);
+                                const data = new Uint8Array(bytes);
+                                
+                                await rxCharacteristic.writeValue(data);
+                                return resolve();
+                            } catch (error) {
+                                addLog(`Erro: ${error.message}`, 'error');
+                                return reject(error);
+                            }
+                        })();
+                    });
+                });
+            }
+
+            // ===== SIMULAR PRESSIONAMENTO =====
+            function simulateButtonPress(buttonId) {
+                const button = document.getElementById(buttonId);
+                if (!button) return;
+                
+                button.classList.add('key-press');
+                setTimeout(() => {
+                    button.classList.remove('key-press');
+                }, 100);
+                
+                button.classList.add('feedback-sent');
+                setTimeout(() => {
+                    button.classList.remove('feedback-sent');
+                }, 200);
+            }
+
+            // ===== EVENTOS DE TECLADO =====
+            function setupKeyboardEvents() {
+                document.addEventListener('keydown', (event) => {
+                    if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA') {
+                        return;
+                    }
+                    
+                    const key = event.key.toLowerCase();
+                    
+                    let mappedKey = key;
+                    if (key.startsWith('arrow')) {
+                        mappedKey = key;
+                    }
+                    
+                    if (keyMap.hasOwnProperty(mappedKey)) {
+                        event.preventDefault();
+                        
+                        const mapping = keyMap[mappedKey];
+                        simulateButtonPress(mapping.buttonId);
+                        sendCommand(mapping.command, 'teclado').catch(err => {});
+                    }
+                });
+            }
+
+            // ===== EVENTOS DOS BOTÕES =====
+            function setupButtonEvents() {
+                const buttons = [
+                    'up', 'left', 'down', 'right', 'center',
+                    '1', '2', '3', '4', '5', '6', '7', '8', '9', 'zero'
+                ];
+                
+                buttons.forEach(id => {
+                    const element = document.getElementById(`btn-${id}`);
+                    if (element) {
+                        element.addEventListener('click', () => {
+                            let command = id;
+                            if (id === 'up') command = 'w';
+                            else if (id === 'left') command = 'a';
+                            else if (id === 'down') command = 's';
+                            else if (id === 'right') command = 'd';
+                            else if (id === 'center') command = 'x';
+                            else if (id === 'zero') command = '0';
+                            
+                            sendCommand(command, 'botão');
+                            simulateButtonPress(`btn-${id}`);
+                        });
+                    }
+                });
+            }
+
+            // ===== CONEXÃO BLUETOOTH =====
+            async function connectToMicrobit() {
+                try {
+                    addLog('Procurando micro:bit...', 'info');
+                    
+                    bluetoothDevice = await navigator.bluetooth.requestDevice({
+                        filters: [{ namePrefix: "BBC micro:bit" }],
+                        optionalServices: [UART_SERVICE_UUID]
+                    });
+
+                    addLog(`Encontrado: ${bluetoothDevice.name}`, 'success');
+                    
+                    gattServer = await bluetoothDevice.gatt.connect();
+                    
+                    const service = await gattServer.getPrimaryService(UART_SERVICE_UUID);
+                    
+                    txCharacteristic = await service.getCharacteristic(UART_TX_CHARACTERISTIC_UUID);
+                    await txCharacteristic.startNotifications();
+                    
+                    txCharacteristic.addEventListener('characteristicvaluechanged', (event) => {
+                        const value = event.target.value;
+                        const decoder = new TextDecoder('utf-8');
+                        const received = decoder.decode(value);
+                        addLog(`Recebido: ${received}`, 'info');
+                    });
+                    
+                    rxCharacteristic = await service.getCharacteristic(UART_RX_CHARACTERISTIC_UUID);
+                    
+                    const warmBytes = new Uint8Array([10]);
+                    await rxCharacteristic.writeValue(warmBytes);
+                    
+                    statusArea.classList.add('connected');
+                    statusText.innerText = 'Conectado';
+                    connectBtn.style.display = 'none';
+                    disconnectBtn.style.display = 'flex';
+                    
+                    addLog('✅ Conectado!', 'success');
+                    
+                } catch (error) {
+                    addLog(`Erro: ${error.message}`, 'error');
+                    disconnectFromMicrobit();
+                }
+            }
+
+            function disconnectFromMicrobit() {
+                if (gattServer && gattServer.connected) {
+                    gattServer.disconnect();
+                }
+                bluetoothDevice = null;
+                rxCharacteristic = null;
+                txCharacteristic = null;
+                gattServer = null;
+                
+                statusArea.classList.remove('connected');
+                statusText.innerText = 'Desconectado';
+                connectBtn.style.display = 'flex';
+                disconnectBtn.style.display = 'none';
+                addLog('Desconectado', 'warning');
+            }
+
+            async function requestWakeLock() {
+                try {
+                    if ('wakeLock' in navigator) {
+                        wakeLock = await navigator.wakeLock.request('screen');
+                        wakeLock.addEventListener('release', () => {});
+                    }
+                } catch (err) {}
+            }
+
+            function debugAndroid() {
+                addLog('🔧 DEBUG', 'info');
+                addLog(`WebBT: ${'bluetooth' in navigator ? 'Sim' : 'Não'}`, 'info');
+                if (bluetoothDevice) {
+                    addLog(`Conectado: Sim`, 'info');
+                } else {
+                    addLog('Nenhum dispositivo', 'warning');
+                }
+            }
+
+            function toggleFullScreen() {
+                if (!document.fullscreenElement) {
+                    if (document.documentElement.requestFullscreen) {
+                        document.documentElement.requestFullscreen();
+                    }
+                    fullscreenBtn.textContent = '✕';
+                } else {
+                    if (document.exitFullscreen) {
+                        document.exitFullscreen();
+                    }
+                    fullscreenBtn.textContent = '⛶';
+                }
+            }
 
             function updateFullscreenButton() {
                 if (document.fullscreenElement) {
                     fullscreenBtn.textContent = '✕';
-                    fullscreenBtn.title = 'Sair da Tela Cheia';
                 } else {
                     fullscreenBtn.textContent = '⛶';
-                    fullscreenBtn.title = 'Tela Cheia';
                 }
             }
 
-            // ... (resto do código existente) ...
+            // ===== INICIALIZAÇÃO =====
+            window.addEventListener('load', () => {
+                setupButtonEvents();
+                setupKeyboardEvents();
+                
+                connectBtn.addEventListener('click', async () => {
+                    await requestWakeLock();
+                    await connectToMicrobit();
+                });
+                
+                disconnectBtn.addEventListener('click', disconnectFromMicrobit);
+                debugBtn.addEventListener('click', debugAndroid);
+                fullscreenBtn.addEventListener('click', toggleFullScreen);
+                
+                document.addEventListener('fullscreenchange', updateFullscreenButton);
+                
+                const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+                if (isIOS) {
+                    addLog('iOS: Web Bluetooth não suportado', 'error');
+                }
+            });
 
-            // OBS: Mantenha TODO o código anterior do Bluetooth, keyMap, etc
-            // Por questão de espaço, não repeti aqui, mas você deve manter
-            // todas as funções: sendCommand, setupKeyboardEvents, connectToMicrobit, etc
         })();
     </script>
 </body>
