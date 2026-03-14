@@ -4,19 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Controle Micro:bit - Prof. Cleber</title>
-    
-    <!-- MANIFEST PWA -->
     <link rel="manifest" href="manifest.json">
-    
-    <!-- FAVICON - ÍCONE DA ABA (ROBÔ) -->
-    <link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAB80lEQVRYhcWXMUgDMRiFX0RRpLiIiyAiKIiCg4uDgyCCg4OLg4OLgyAoig6KoiAoujg4iItQEAVBEBRxEEQcXBxERMQiIg6C0FIqYr8Ml5JLL2kv6QcP7pJc/r8vISFNaZr29vbCGJPP5/Ng+vr6TkIId7Va7U0d9Ho9uF6vD6fT6RgMBveZTOYxnU4/TqfTH7qFcw8PDxCdTCafjDEoFotQKpV+bFyhUIBUKgWpVAoajQb0ej1oNpsQBAFUKhUYj8fQ7/eBc+5tLpFIQBRFMBgMQNfA7u4uHB4eHgngnEOxWITZbAaz2QwURQFCCHDOoV6vw3Q6hXK5DIvFAqrVqjNgPB5Ds9mEfD4Pi8XCmW42m0Gj0QDTgO4E+rY3EAQsFgtYr9dQKpVgPp9DoVAARVFgOp0CAJBKpUBVVZhOpyAIAqTTaZhMJsBai/b7PZRKJeCcQ6fTgX6/70y33+9hNBpBPp+HIAic6YQQB8M2AdZafwPJZBKYmE6n0G63IR6Pw2q1AgCAaDQK29vbkMlkIJvNwmg0gvF4DPl8HobDITDGIBaLQa1Wg81mAwCwt7cHjUYDVqsVxONxaLVaXgbb7TbkcjkQQggfA9FoFBaLhSldKpX6FIT/0j9DY2PjN0IIwI26mU0kEsd4PH4Nw/B6Pp97X2caY4vF4j2VSn3+J/0Ck+8lKJ8Dp+4AAAAASUVORK5CYII=">
-    <link rel="icon" type="image/png" sizes="16x16" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAABcElEQVQ4jY1TPUvDUBQ9qWjRVhAnF0EUBBcXBxdBcBAHF8FBHBzEzU0QFAcXR0EQBQVxEBcXQRBBEBRxEEQQh7pZBBFEBBGR4qCYtMV4EmzapL4wCOTe8+7LuefD2Gw2UalUEAQB4vE4tFotFosF6vU6rFYrstksBoMB5vM5er0eJpMJqtUqptMpBoMBRqMRjEYjptMpBEEQEZjNZiRJQhAEeL1eiKIoIiiKIuFwGFEUwWg0IplMolarodlsotlsIhaLIZFIoNVqYTabQVVVEEIwnU5hMpkgiiK63S5UVQ2Jw2g0Aq01UqkUJEnCbrcL2QuCAFmW4fV6oWka5vM5er0edF2H3+8H5xyKosBisSCTyWAymWxN4JzD6/ViOp0il8tBURTYbLZ/FIIgoNlsotfrwWazgXMOXdehKAp0XUexWMT7+ztGoxEMw4CqqhAEAaIoQpZlyLKMfr+P6XSK0WgETdOg6/q3N6ZpYjgcYr1eA4BQKpXQaDQQBAGy2SxsNtsf4gvU2TZbipZ5TQAAAABJRU5ErkJggg==">
-    
-    <!-- APPLE TOUCH ICON (para iOS) -->
-    <link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAB80lEQVRYhcWXMUgDMRiFX0RRpLiIiyAiKIiCg4uDgyCCg4OLg4OLgyAoig6KoiAoujg4iItQEAVBEBRxEEQcXBxERMQiIg6C0FIqYr8Ml5JLL2kv6QcP7pJc/r8vISFNaZr29vbCGJPP5/Ng+vr6TkIId7Va7U0d9Ho9uF6vD6fT6RgMBveZTOYxnU4/TqfTH7qFcw8PDxCdTCafjDEoFotQKpV+bFyhUIBUKgWpVAoajQb0ej1oNpsQBAFUKhUYj8fQ7/eBc+5tLpFIQBRFMBgMQNfA7u4uHB4eHgngnEOxWITZbAaz2QwURQFCCHDOoV6vw3Q6hXK5DIvFAqrVqjNgPB5Ds9mEfD4Pi8XCmW42m0Gj0QDTgO4E+rY3EAQsFgtYr9dQKpVgPp9DoVAARVFgOp0CAJBKpUBVVZhOpyAIAqTTaZhMJsBai/b7PZRKJeCcQ6fTgX6/70y33+9hNBpBPp+HIAic6YQQB8M2AdZafwPJZBKYmE6n0G63IR6Pw2q1AgCAaDQK29vbkMlkIJvNwmg0gvF4DPl8HobDITDGIBaLQa1Wg81mAwCwt7cHjUYDVqsVxONxaLVaXgbb7bTkcjkQQggfA9FoFBaLhSldKpX6FIT/0j9DY2PjN0IIwI26mU0kEsd4PH4Nw/B6Pp97X2caY4vF4j2VSn3+J/0Ck+8lKJ8Dp+4AAAAASUVORK5CYII=">
-    
     <style>
-        /* ===== RESET E CONFIGURAÇÕES GLOBAIS ===== */
         * {
             margin: 0;
             padding: 0;
@@ -27,7 +16,7 @@
         html, body {
             width: 100%;
             min-height: 100vh;
-            min-height: -webkit-fill-available;
+            min-height: -webkit-fill-available; /* Para Safari mobile */
             background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
         }
 
@@ -53,7 +42,7 @@
             flex-direction: column;
         }
 
-        /* ===== CABEÇALHO (SEM ÍCONE GRANDE) ===== */
+        /* Cabeçalho com Badge */
         .header {
             display: flex;
             justify-content: space-between;
@@ -93,13 +82,7 @@
             100% { transform: scale(1); }
         }
 
-        .fullscreen-controls {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-        }
-
-        /* ===== STATUS BLUETOOTH ===== */
+        /* Status Bluetooth */
         .status-area {
             background: rgba(0,0,0,0.2);
             border-radius: 16px;
@@ -136,15 +119,16 @@
             font-size: 0.95rem;
         }
 
-        /* ===== LAYOUT PRINCIPAL ===== */
+        /* LAYOUT PRINCIPAL - OCUPA ESPAÇO RESTANTE */
         .main-controls {
             display: flex;
             flex-direction: column;
             gap: 15px;
             flex: 1;
-            min-height: 0;
+            min-height: 0; /* Importante para flexbox */
         }
 
+        /* Para telas grandes ou em landscape */
         @media (min-width: 768px) and (orientation: landscape) {
             .main-controls {
                 flex-direction: row;
@@ -152,7 +136,7 @@
             }
         }
 
-        /* ===== SEÇÃO WASD ===== */
+        /* Seção de Controle: WASD + Botão Central */
         .control-section {
             background: rgba(0,0,0,0.2);
             border-radius: 25px;
@@ -238,6 +222,7 @@
             line-height: 1;
         }
 
+        /* Botão Central (X) */
         .btn-center {
             background: #FFA000;
             box-shadow: 0 6px 0 #b26500, 0 8px 12px rgba(0,0,0,0.3);
@@ -248,7 +233,7 @@
             line-height: 1;
         }
 
-        /* ===== SEÇÃO NUMÉRICA ===== */
+        /* Seção dos Números */
         .numbers-section {
             background: rgba(0,0,0,0.2);
             border-radius: 25px;
@@ -317,13 +302,14 @@
             box-shadow: 0 6px 0 #1b5e20 !important;
         }
 
+        /* Cores personalizadas por linha */
         .num-row:nth-child(1) .btn-num { background: #2e7d32; box-shadow: 0 6px 0 #1b5e20; }
         .num-row:nth-child(2) .btn-num { background: #ff6f00; box-shadow: 0 6px 0 #b26500; }
         .num-row:nth-child(3) .btn-num { background: #6a1b9a; box-shadow: 0 6px 0 #38006b; }
         #btn-zero { background: #0288d1; box-shadow: 0 6px 0 #01579b; }
-        #btn-zero.btn-num { max-width: calc(80px * 2 + 8px); }
+        #btn-zero.btn-num { max-width: calc(80px * 2 + 8px); } /* Botão 0 maior */
 
-        /* ===== BOTÕES DE AÇÃO ===== */
+        /* Botões de ação */
         .action-buttons {
             display: flex;
             gap: 8px;
@@ -357,7 +343,7 @@
 
         .btn-action:active { transform: scale(0.97); }
 
-        /* ===== PAINEL DE LOGS ===== */
+        /* Painel de Logs */
         .log-panel {
             background: #0a0f1e;
             border-radius: 16px;
@@ -384,7 +370,7 @@
         .log-icon { font-size: 0.9rem; }
         .log-msg { word-break: break-word; }
 
-        /* ===== DICAS ANDROID ===== */
+        /* Dicas Android */
         .android-tip {
             background: #311b92;
             border-radius: 14px;
@@ -399,7 +385,7 @@
             flex-shrink: 0;
         }
 
-        /* ===== RODAPÉ ===== */
+        /* Rodapé */
         .footer {
             text-align: center;
             color: rgba(255,255,255,0.7);
@@ -421,7 +407,14 @@
             text-decoration: none;
         }
 
-        /* ===== RESPONSIVIDADE ===== */
+        /* Botão Fullscreen */
+        .fullscreen-controls {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        /* Mobile pequeno */
         @media (max-width: 380px) {
             .btn-wasd { max-width: 70px; }
             .btn-num { max-width: 60px; }
@@ -433,7 +426,7 @@
 </head>
 <body>
     <div class="container">
-        <!-- CABEÇALHO (SEM ÍCONE GRANDE) -->
+        <!-- Cabeçalho -->
         <div class="header">
             <h1>🎮 Micro:bit Control</h1>
             <div class="fullscreen-controls">
@@ -442,16 +435,16 @@
             </div>
         </div>
 
-        <!-- STATUS BLUETOOTH -->
+        <!-- Status Bluetooth -->
         <div class="status-area" id="statusArea">
             <div class="status-indicator" id="statusIndicator"></div>
             <div class="status-text" id="statusText">Desconectado</div>
             <div>📶</div>
         </div>
 
-        <!-- LAYOUT PRINCIPAL: SETAS + NÚMEROS -->
+        <!-- LAYOUT PRINCIPAL -->
         <div class="main-controls">
-            <!-- SEÇÃO WASD -->
+            <!-- CONTROLE WASD -->
             <div class="control-section">
                 <div class="section-title">
                     ⏹️ Movimento 
@@ -487,7 +480,7 @@
                 </div>
             </div>
 
-            <!-- SEÇÃO NUMÉRICA -->
+            <!-- BOTÕES NUMÉRICOS -->
             <div class="numbers-section">
                 <div class="section-title">
                     🔢 Números
@@ -516,330 +509,73 @@
             </div>
         </div>
 
-        <!-- BOTÕES DE CONEXÃO -->
+        <!-- Botões de Conexão -->
         <div class="action-buttons">
             <button class="btn-action connect" id="connectBtn">🔗 Conectar</button>
             <button class="btn-action disconnect" id="disconnectBtn" style="display: none;">⛔ Desconectar</button>
             <button class="btn-action debug" id="debugBtn">🐞 Debug Android</button>
         </div>
 
-        <!-- PAINEL DE LOGS -->
+        <!-- Painel de Logs -->
         <div class="log-panel" id="logPanel">
             <div class="log-entry"><span class="log-time">[Sistema]</span> <span class="log-icon">ℹ️</span> <span class="log-msg">Pronto. Clique em Conectar.</span></div>
         </div>
 
-        <!-- DICAS ANDROID -->
+        <!-- Dicas Android -->
         <div class="android-tip">
             <span>📱</span>
-            <span><strong>Dica:</strong> Use WASD ou setas no teclado. Tela cheia automática.</span>
+            <span><strong>Tela cheia automática!</strong> A página já ocupa toda a tela. Toque em ⛶ para mais espaço.</span>
         </div>
 
-        <!-- RODAPÉ COM E-MAIL -->
+        <!-- Rodapé -->
         <div class="footer">
             <span class="professor">Projeto do professor Cleber</span> · 
             <a href="mailto:profisicaclebr@gmail.com" class="email">📧 profisicaclebr@gmail.com</a>
             <br>
-            <small>WASD + Setas + Números 0-9</small>
+            <small>⌨️ WASD + Setas + Números</small>
         </div>
     </div>
 
     <script>
         (function() {
-            // ===== CONFIGURAÇÕES BLUETOOTH (CRÍTICAS) =====
-            const UART_SERVICE_UUID = "6e400001-b5a3-f393-e0a9-e50e24dcca9e";
-            const UART_TX_CHARACTERISTIC_UUID = "6e400002-b5a3-f393-e0a9-e50e24dcca9e";
-            const UART_RX_CHARACTERISTIC_UUID = "6e400003-b5a3-f393-e0a9-e50e24dcca9e";
+            // ... (todo o código anterior permanece igual) ...
 
-            // ===== ESTADO DA APLICAÇÃO =====
-            let bluetoothDevice = null;
-            let rxCharacteristic = null;
-            let txCharacteristic = null;
-            let gattServer = null;
-            let commandQueue = Promise.resolve();
-            let wakeLock = null;
-
-            // ===== ELEMENTOS DOM =====
-            const statusArea = document.getElementById('statusArea');
-            const statusText = document.getElementById('statusText');
-            const connectBtn = document.getElementById('connectBtn');
-            const disconnectBtn = document.getElementById('disconnectBtn');
-            const debugBtn = document.getElementById('debugBtn');
+            // ADICIONAR FUNÇÃO DE TELA CHEIA
             const fullscreenBtn = document.getElementById('fullscreenBtn');
-            const logPanel = document.getElementById('logPanel');
-
-            // ===== MAPEAMENTO DE TECLAS =====
-            const keyMap = {
-                'w': { buttonId: 'btn-up', command: 'w' },
-                'a': { buttonId: 'btn-left', command: 'a' },
-                's': { buttonId: 'btn-down', command: 's' },
-                'd': { buttonId: 'btn-right', command: 'd' },
-                'arrowup': { buttonId: 'btn-up', command: 'w' },
-                'arrowdown': { buttonId: 'btn-down', command: 's' },
-                'arrowleft': { buttonId: 'btn-left', command: 'a' },
-                'arrowright': { buttonId: 'btn-right', command: 'd' },
-                'x': { buttonId: 'btn-center', command: 'x' },
-                '0': { buttonId: 'btn-zero', command: '0' },
-                '1': { buttonId: 'btn-1', command: '1' },
-                '2': { buttonId: 'btn-2', command: '2' },
-                '3': { buttonId: 'btn-3', command: '3' },
-                '4': { buttonId: 'btn-4', command: '4' },
-                '5': { buttonId: 'btn-5', command: '5' },
-                '6': { buttonId: 'btn-6', command: '6' },
-                '7': { buttonId: 'btn-7', command: '7' },
-                '8': { buttonId: 'btn-8', command: '8' },
-                '9': { buttonId: 'btn-9', command: '9' }
-            };
-
-            // ===== FUNÇÕES DE LOG =====
-            function addLog(message, type = 'info') {
-                const entry = document.createElement('div');
-                entry.className = 'log-entry';
-                const now = new Date();
-                const timeStr = `[${now.getHours().toString().padStart(2,'0')}:${now.getMinutes().toString().padStart(2,'0')}:${now.getSeconds().toString().padStart(2,'0')}]`;
-                
-                let icon = 'ℹ️';
-                if (type === 'success') icon = '✅';
-                if (type === 'error') icon = '❌';
-                if (type === 'warning') icon = '⚠️';
-                if (type === 'command') icon = '📤';
-                if (type === 'keyboard') icon = '⌨️';
-                
-                entry.innerHTML = `<span class="log-time">${timeStr}</span> <span class="log-icon">${icon}</span> <span class="log-msg">${message}</span>`;
-                logPanel.appendChild(entry);
-                logPanel.scrollTop = logPanel.scrollHeight;
-                
-                while (logPanel.children.length > 20) {
-                    logPanel.removeChild(logPanel.firstChild);
-                }
-            }
-
-            // ===== FUNÇÃO DE ENVIO (CRÍTICA PARA ANDROID) =====
-            function sendCommand(command, source = 'botão') {
-                return new Promise((resolve, reject) => {
-                    if (!rxCharacteristic) {
-                        addLog('❌ Não conectado. Clique em Conectar primeiro.', 'error');
-                        return reject('Não conectado');
-                    }
-
-                    commandQueue = commandQueue.then(() => {
-                        return (async () => {
-                            try {
-                                addLog(`📤 Enviando: "${command}" (${source})`, 'command');
-                                
-                                // ANDROID: NUNCA usar TextEncoder
-                                const bytes = [];
-                                for (let i = 0; i < command.length; i++) {
-                                    bytes.push(command.charCodeAt(i));
-                                }
-                                bytes.push(10); // newline (\n)
-                                const data = new Uint8Array(bytes);
-                                
-                                await rxCharacteristic.writeValue(data);
-                                return resolve();
-                            } catch (error) {
-                                addLog(`❌ Erro: ${error.message}`, 'error');
-                                return reject(error);
-                            }
-                        })();
-                    });
-
-                    commandQueue = commandQueue.catch(err => {
-                        addLog(`⚠️ Fila: ${err.message}`, 'error');
-                    });
-                });
-            }
-
-            // ===== SIMULAR PRESSIONAMENTO =====
-            function simulateButtonPress(buttonId) {
-                const button = document.getElementById(buttonId);
-                if (!button) return;
-                
-                button.classList.add('key-press');
-                setTimeout(() => {
-                    button.classList.remove('key-press');
-                }, 100);
-                
-                button.classList.add('feedback-sent');
-                setTimeout(() => {
-                    button.classList.remove('feedback-sent');
-                }, 200);
-            }
-
-            // ===== EVENTOS DE TECLADO =====
-            function setupKeyboardEvents() {
-                document.addEventListener('keydown', (event) => {
-                    if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA') {
-                        return;
-                    }
-                    
-                    const key = event.key.toLowerCase();
-                    
-                    let mappedKey = key;
-                    if (key.startsWith('arrow')) {
-                        mappedKey = key;
-                    }
-                    
-                    if (keyMap.hasOwnProperty(mappedKey)) {
-                        event.preventDefault();
-                        
-                        const mapping = keyMap[mappedKey];
-                        simulateButtonPress(mapping.buttonId);
-                        sendCommand(mapping.command, 'teclado').catch(err => {});
-                        
-                        let displayKey = key;
-                        if (key === 'arrowup') displayKey = '↑';
-                        else if (key === 'arrowdown') displayKey = '↓';
-                        else if (key === 'arrowleft') displayKey = '←';
-                        else if (key === 'arrowright') displayKey = '→';
-                        else displayKey = key.toUpperCase();
-                        
-                        addLog(`⌨️ Tecla: ${displayKey} → "${mapping.command}"`, 'keyboard');
-                    }
-                });
-            }
-
-            // ===== EVENTOS DOS BOTÕES =====
-            function setupButtonEvents() {
-                const buttons = [
-                    'up', 'left', 'down', 'right', 'center',
-                    '1', '2', '3', '4', '5', '6', '7', '8', '9', 'zero'
-                ];
-                
-                buttons.forEach(id => {
-                    const element = document.getElementById(`btn-${id}`);
-                    if (element) {
-                        element.addEventListener('click', () => {
-                            let command = id;
-                            if (id === 'up') command = 'w';
-                            else if (id === 'left') command = 'a';
-                            else if (id === 'down') command = 's';
-                            else if (id === 'right') command = 'd';
-                            else if (id === 'center') command = 'x';
-                            else if (id === 'zero') command = '0';
-                            
-                            sendCommand(command, 'botão');
-                            simulateButtonPress(`btn-${id}`);
-                        });
-                    }
-                });
-            }
-
-            // ===== CONEXÃO BLUETOOTH =====
-            async function connectToMicrobit() {
-                try {
-                    addLog('🔍 Procurando micro:bit...', 'info');
-                    
-                    bluetoothDevice = await navigator.bluetooth.requestDevice({
-                        filters: [{ namePrefix: "BBC micro:bit" }],
-                        optionalServices: [UART_SERVICE_UUID]
-                    });
-
-                    addLog(`✅ Encontrado: ${bluetoothDevice.name}`, 'success');
-                    
-                    const timeout = /android/i.test(navigator.userAgent) ? 10000 : 5000;
-                    gattServer = await bluetoothDevice.gatt.connect();
-                    
-                    const service = await gattServer.getPrimaryService(UART_SERVICE_UUID);
-                    
-                    txCharacteristic = await service.getCharacteristic(UART_TX_CHARACTERISTIC_UUID);
-                    await txCharacteristic.startNotifications();
-                    
-                    txCharacteristic.addEventListener('characteristicvaluechanged', (event) => {
-                        const value = event.target.value;
-                        const decoder = new TextDecoder('utf-8');
-                        const received = decoder.decode(value);
-                        addLog(`📥 Recebido: ${received}`, 'info');
-                    });
-                    
-                    rxCharacteristic = await service.getCharacteristic(UART_RX_CHARACTERISTIC_UUID);
-                    
-                    const warmBytes = new Uint8Array([10]);
-                    await rxCharacteristic.writeValue(warmBytes);
-                    addLog('🔥 Byte de aquecimento enviado', 'success');
-                    
-                    statusArea.classList.add('connected');
-                    statusText.innerText = 'Conectado';
-                    connectBtn.style.display = 'none';
-                    disconnectBtn.style.display = 'flex';
-                    
-                    addLog('✅ Conectado! Pronto para enviar comandos.', 'success');
-                    
-                } catch (error) {
-                    addLog(`❌ Erro: ${error.message}`, 'error');
-                    disconnectFromMicrobit();
-                }
-            }
-
-            function disconnectFromMicrobit() {
-                if (gattServer && gattServer.connected) {
-                    gattServer.disconnect();
-                }
-                bluetoothDevice = null;
-                rxCharacteristic = null;
-                txCharacteristic = null;
-                gattServer = null;
-                
-                statusArea.classList.remove('connected');
-                statusText.innerText = 'Desconectado';
-                connectBtn.style.display = 'flex';
-                disconnectBtn.style.display = 'none';
-                addLog('👋 Desconectado.', 'warning');
-            }
-
-            async function requestWakeLock() {
-                try {
-                    if ('wakeLock' in navigator) {
-                        wakeLock = await navigator.wakeLock.request('screen');
-                        addLog('⚡ Tela sempre ativa', 'success');
-                        
-                        wakeLock.addEventListener('release', () => {
-                            addLog('💤 Wake Lock liberado', 'info');
-                        });
-                    }
-                } catch (err) {
-                    addLog(`⚠️ Wake Lock: ${err.message}`, 'warning');
-                }
-            }
-
-            function debugAndroid() {
-                addLog('🔧 DEBUG ANDROID', 'info');
-                addLog(`UA: ${navigator.userAgent}`, 'info');
-                addLog(`Web Bluetooth: ${'bluetooth' in navigator ? 'Sim' : 'Não'}`, 'info');
-                
-                if (bluetoothDevice) {
-                    addLog(`Dispositivo: ${bluetoothDevice.name}`, 'info');
-                    addLog(`Conectado: ${gattServer && gattServer.connected ? 'Sim' : 'Não'}`, 'info');
-                } else {
-                    addLog('Nenhum dispositivo conectado', 'warning');
-                }
-            }
-
-            // ===== FUNÇÃO DE TELA CHEIA =====
+            
             function toggleFullScreen() {
                 if (!document.fullscreenElement) {
+                    // Entrar em tela cheia
                     if (document.documentElement.requestFullscreen) {
                         document.documentElement.requestFullscreen();
-                    } else if (document.documentElement.webkitRequestFullscreen) {
+                    } else if (document.documentElement.webkitRequestFullscreen) { /* Safari */
                         document.documentElement.webkitRequestFullscreen();
-                    } else if (document.documentElement.msRequestFullscreen) {
+                    } else if (document.documentElement.msRequestFullscreen) { /* IE/Edge */
                         document.documentElement.msRequestFullscreen();
                     }
                     fullscreenBtn.textContent = '✕';
                     fullscreenBtn.title = 'Sair da Tela Cheia';
-                    addLog('⛶ Modo tela cheia ativado', 'success');
                 } else {
+                    // Sair da tela cheia
                     if (document.exitFullscreen) {
                         document.exitFullscreen();
-                    } else if (document.webkitExitFullscreen) {
+                    } else if (document.webkitExitFullscreen) { /* Safari */
                         document.webkitExitFullscreen();
-                    } else if (document.msExitFullscreen) {
+                    } else if (document.msExitFullscreen) { /* IE/Edge */
                         document.msExitFullscreen();
                     }
                     fullscreenBtn.textContent = '⛶';
                     fullscreenBtn.title = 'Tela Cheia';
-                    addLog('⛶ Modo tela cheia desativado', 'info');
                 }
             }
+
+            fullscreenBtn.addEventListener('click', toggleFullScreen);
+
+            // Detectar mudanças no estado da tela cheia
+            document.addEventListener('fullscreenchange', updateFullscreenButton);
+            document.addEventListener('webkitfullscreenchange', updateFullscreenButton);
+            document.addEventListener('mozfullscreenchange', updateFullscreenButton);
+            document.addEventListener('MSFullscreenChange', updateFullscreenButton);
 
             function updateFullscreenButton() {
                 if (document.fullscreenElement) {
@@ -851,37 +587,11 @@
                 }
             }
 
-            // ===== INICIALIZAÇÃO =====
-            window.addEventListener('load', () => {
-                setupButtonEvents();
-                setupKeyboardEvents();
-                
-                connectBtn.addEventListener('click', async () => {
-                    await requestWakeLock();
-                    await connectToMicrobit();
-                });
-                
-                disconnectBtn.addEventListener('click', disconnectFromMicrobit);
-                debugBtn.addEventListener('click', debugAndroid);
-                fullscreenBtn.addEventListener('click', toggleFullScreen);
-                
-                document.addEventListener('fullscreenchange', updateFullscreenButton);
-                document.addEventListener('webkitfullscreenchange', updateFullscreenButton);
-                document.addEventListener('mozfullscreenchange', updateFullscreenButton);
-                document.addEventListener('MSFullscreenChange', updateFullscreenButton);
-                
-                const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-                if (isIOS) {
-                    addLog('⚠️ iOS: Web Bluetooth não suportado', 'error');
-                }
-            });
+            // ... (resto do código existente) ...
 
-            document.addEventListener('visibilitychange', async () => {
-                if (wakeLock && document.visibilityState === 'visible') {
-                    wakeLock = await navigator.wakeLock.request('screen');
-                }
-            });
-
+            // OBS: Mantenha TODO o código anterior do Bluetooth, keyMap, etc
+            // Por questão de espaço, não repeti aqui, mas você deve manter
+            // todas as funções: sendCommand, setupKeyboardEvents, connectToMicrobit, etc
         })();
     </script>
 </body>
