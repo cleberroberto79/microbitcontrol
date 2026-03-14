@@ -1,9 +1,22 @@
 {
-    "name": "Controle Micro:bit Prof. Cleber",
-    "short_name": "Ctrl micro:bit",
+    "name": "Controle Micro:bit - Professor Cleber",
+    "short_name": "Ctrl Robô",
+    "description": "Controle remoto para micro:bit com WASD e números",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#1a237e",
     "theme_color": "#283593",
-    "orientation": "portrait"
+    "orientation": "any",
+    "icons": [
+        {
+            "src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAB80lEQVRYhcWXMUgDMRiFX0RRpLiIiyAiKIiCg4uDgyCCg4OLg4OLgyAoig6KoiAoujg4iItQEAVBEBRxEEQcXBxERMQiIg6C0FIqYr8Ml5JLL2kv6QcP7pJc/r8vISFNaZr29vbCGJPP5/Ng+vr6TkIId7Va7U0d9Ho9uF6vD6fT6RgMBveZTOYxnU4/TqfTH7qFcw8PDxCdTCafjDEoFotQKpV+bFyhUIBUKgWpVAoajQb0ej1oNpsQBAFUKhUYj8fQ7/eBc+5tLpFIQBRFMBgMQNfA7u4uHB4eHgngnEOxWITZbAaz2QwURQFCCHDOoV6vw3Q6hXK5DIvFAqrVqjNgPB5Ds9mEfD4Pi8XCmW42m0Gj0QDTgO4E+rY3EAQsFgtYr9dQKpVgPp9DoVAARVFgOp0CAJBKpUBVVZhOpyAIAqTTaZhMJsBai/b7PZRKJeCcQ6fTgX6/70y33+9hNBpBPp+HIAic6YQQB8M2AdZafwPJZBKYmE6n0G63IR6Pw2q1AgCAaDQK29vbkMlkIJvNwmg0gvF4DPl8HobDITDGIBaLQa1Wg81mAwCwt7cHjUYDVqsVxONxaLVaXgbb7TbkcjkQQggfA9FoFBaLhSldKpX6FIT/0j9DY2PjN0IIwI26mU0kEsd4PH4Nw/B6Pp97X2caY4vF4j2VSn3+J/0Ck+8lKJ8Dp+4AAAAASUVORK5CYII=",
+            "sizes": "32x32",
+            "type": "image/png"
+        },
+        {
+            "src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAABcElEQVQ4jY1TPUvDUBQ9qWjRVhAnF0EUBBcXBxdBcBAHF8FBHBzEzU0QFAcXR0EQBQVxEBcXQRBBEBRxEEQQh7pZBBFEBBGR4qCYtMV4EmzapL4wCOTe8+7LuefD2Gw2UalUEAQB4vE4tFotFosF6vU6rFYrstksBoMB5vM5er0eJpMJqtUqptMpBoMBRqMRjEYjptMpBEEQEZjNZiRJQhAEeL1eiKIoIiiKIuFwGFEUwWg0IplMolarodlsotlsIhaLIZFIoNVqYTabQVVVEEIwnU5hMpkgiiK63S5UVQ2Jw2g0Aq01UqkUJEnCbrcL2QuCAFmW4fV6oWka5vM5er0edF2H3+8H5xyKosBisSCTyWAymWxN4JzD6/ViOp0il8tBURTYbLZ/FIIgoNlsotfrwWazgXMOXdehKAp0XUexWMT7+ztGoxEMw4CqqhAEAaIoQpZlyLKMfr+P6XSK0WgETdOg6/q3N6ZpYjgcYr1eA4BQKpXQaDQQBAGy2SxsNtsf4gvU2TZbipZ5TQAAAABJRU5ErkJggg==",
+            "sizes": "16x16",
+            "type": "image/png"
+        }
+    ]
 }
