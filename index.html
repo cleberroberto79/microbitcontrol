@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Controle Micro:bit - Prof. Cleber (WASD + Números + Teclado)</title>
+    <link rel="manifest" href="manifest.json">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 16px;
+        }
+
+        .container {
+            max-width: 600px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 24px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        /* Cabeçalho com Badge */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        h1 {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 600;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .badge {
+            background: #ff6d00;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1rem;
+            animation: pulse 2s infinite;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); background: #ff8f00; }
+            100% { transform: scale(1); }
+        }
+
+        /* Status Bluetooth */
+        .status-area {
+            background: rgba(0,0,0,0.2);
+            border-radius: 16px;
+            padding: 12px 16px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: white;
+            border-left: 5px solid #f44336;
+        }
+
+        .status-area.connected {
+            border-left-color: #4caf50;
+        }
+
+        .status-indicator {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #f44336;
+            transition: all 0.3s;
+        }
+
+        .connected .status-indicator {
+            background: #4caf50;
+            box-shadow: 0 0 15px #4caf50;
+        }
+
+        .status-text {
+            flex: 1;
+            font-weight: 500;
+        }
+
+        /* Seção de Controle: WASD + Botão Central */
+        .control-section {
+            background: rgba(0,0,0,0.2);
+            border-radius: 30px;
+            padding: 25px 20px;
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            color: rgba(255,255,255,0.7);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            font-weight: 300;
+        }
+
+        .keyboard-hint {
+            color: #ffd54f;
+            font-size: 0.8rem;
+            margin-left: 10px;
+            background: rgba(0,0,0,0.3);
+            padding: 4px 8px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+
+        .wasd-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            justify-items: center;
+            align-items: center;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        .btn-wasd {
+            width: 90px;
+            height: 90px;
+            border: none;
+            border-radius: 20px;
+            background: #3949ab;
+            box-shadow: 0 8px 0 #1a237e, 0 10px 15px rgba(0,0,0,0.3);
+            color: white;
+            font-size: 2.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.07s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+            position: relative;
+        }
+
+        .btn-wasd:active, .btn-wasd.key-press {
+            transform: translateY(8px);
+            box-shadow: 0 0 0 #1a237e, 0 5px 10px rgba(0,0,0,0.3);
+            background: #5c6bc0;
+        }
+
+        .btn-wasd .key-hint {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            background: rgba(255,255,255,0.2);
+            padding: 2px 6px;
+            border-radius: 8px;
+            margin-top: 4px;
+            color: #ffd54f;
+        }
+
+        .btn-wasd .arrow-icon {
+            font-size: 2.8rem;
+            line-height: 1;
+        }
+
+        /* Botão Central (X) */
+        .btn-center {
+            background: #FFA000;
+            box-shadow: 0 8px 0 #b26500, 0 10px 15px rgba(0,0,0,0.3);
+        }
+
+        .btn-center .center-dot {
+            font-size: 3rem;
+            line-height: 1;
+        }
+
+        /* Seção dos Números */
+        .numbers-section {
+            background: rgba(0,0,0,0.2);
+            border-radius: 30px;
+            padding: 25px 20px;
+            margin-bottom: 25px;
+            border-top: 2px solid rgba(255,255,255,0.2);
+            border-bottom: 2px solid rgba(255,255,255,0.2);
+        }
+
+        .num-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .num-row {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .btn-num {
+            width: 85px;
+            height: 85px;
+            border: none;
+            border-radius: 20px;
+            background: #5e35b1;
+            box-shadow: 0 8px 0 #311b92, 0 10px 15px rgba(0,0,0,0.3);
+            color: white;
+            font-size: 2.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.07s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-num:active, .btn-num.key-press {
+            transform: translateY(8px);
+            box-shadow: 0 0 0 #1a237e, 0 5px 10px rgba(0,0,0,0.3);
+            filter: brightness(1.2);
+        }
+
+        .btn-num.feedback-sent {
+            background-color: #2e7d32 !important;
+            box-shadow: 0 8px 0 #1b5e20 !important;
+        }
+
+        /* Cores personalizadas por linha */
+        .num-row:nth-child(1) .btn-num { background: #2e7d32; box-shadow: 0 8px 0 #1b5e20; } /* Verde */
+        .num-row:nth-child(2) .btn-num { background: #ff6f00; box-shadow: 0 8px 0 #b26500; } /* Laranja */
+        .num-row:nth-child(3) .btn-num { background: #6a1b9a; box-shadow: 0 8px 0 #38006b; } /* Roxo */
+        #btn-zero { background: #0288d1; box-shadow: 0 8px 0 #01579b; } /* Azul claro */
+        #btn-zero.btn-num { width: calc(85px * 2 + 12px); } /* Botão 0 maior */
+
+        /* Botões de ação (Conectar, etc) */
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+        }
+
+        .btn-action {
+            flex: 1;
+            min-width: 120px;
+            padding: 15px;
+            border: none;
+            border-radius: 16px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .btn-action.connect { background: #4caf50; }
+        .btn-action.disconnect { background: #f44336; }
+        .btn-action.debug { background: #ff6d00; }
+
+        .btn-action:active { transform: scale(0.97); }
+
+        /* Painel de Logs */
+        .log-panel {
+            background: #0a0f1e;
+            border-radius: 20px;
+            padding: 16px;
+            margin-bottom: 15px;
+            max-height: 150px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            color: #00ff9d;
+            border: 1px solid #2a2f3e;
+        }
+
+        .log-entry {
+            padding: 4px 0;
+            border-bottom: 1px solid #1a1f2e;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .log-time { color: #ffaa00; }
+        .log-icon { font-size: 1.1rem; }
+        .log-msg { word-break: break-word; }
+
+        /* Dicas Android */
+        .android-tip {
+            background: #311b92;
+            border-radius: 16px;
+            padding: 12px 16px;
+            color: #cfd8ff;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-left: 4px solid #ff6d00;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            color: rgba(255,255,255,0.5);
+            font-size: 0.85rem;
+        }
+
+        /* Tooltips customizados */
+        [data-tooltip] {
+            position: relative;
+            cursor: pointer;
+        }
+
+        [data-tooltip]:before {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 110%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            white-space: nowrap;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+
+        [data-tooltip]:hover:before {
+            opacity: 1;
+        }
+
+        /* Aviso de teclado */
+        .keyboard-warning {
+            background: rgba(255, 193, 7, 0.2);
+            border-radius: 12px;
+            padding: 8px 12px;
+            margin-bottom: 15px;
+            color: #ffd54f;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px dashed #ffb300;
+        }
+
+        /* Mobile */
+        @media (max-width: 480px) {
+            .container { padding: 16px; }
+            .btn-wasd { width: 75px; height: 75px; font-size: 2rem; }
+            .btn-num { width: 70px; height: 70px; font-size: 2rem; }
+            #btn-zero.btn-num { width: calc(70px * 2 + 12px); }
+            .btn-wasd .arrow-icon { font-size: 2.2rem; }
+            h1 { font-size: 1.4rem; }
+            [data-tooltip]:before { display: none; } /* Sem tooltip no mobile */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Cabeçalho -->
+        <div class="header">
+            <h1>🎮 Micro:bit Control</h1>
+            <div class="badge">Professor Cleber</div>
+        </div>
+
+        <!-- Status Bluetooth -->
+        <div class="status-area" id="statusArea">
+            <div class="status-indicator" id="statusIndicator"></div>
+            <div class="status-text" id="statusText">Desconectado</div>
+            <div>📶</div>
+        </div>
+
+        <!-- Aviso de teclado -->
+        <div class="keyboard-warning">
+            <span>⌨️</span>
+            <span><strong>Teclado funcionando!</strong> Pressione W A S D para setas, X para central, e os números 0-9 para comandos numéricos.</span>
+        </div>
+
+        <!-- CONTROLE WASD + BOTÃO CENTRAL -->
+        <div class="control-section">
+            <div class="section-title">
+                ⏹️ Controle de Movimento (WASD) 
+                <span class="keyboard-hint">Teclado: W A S D</span>
+            </div>
+            <div class="wasd-grid">
+                <!-- Linha 1: vazio, CIMA, vazio -->
+                <div></div>
+                <button class="btn-wasd" id="btn-up" data-tooltip="Frente (W)">
+                    <span class="arrow-icon">↑</span>
+                    <span class="key-hint">W</span>
+                </button>
+                <div></div>
+
+                <!-- Linha 2: ESQUERDA, CENTRO, DIREITA -->
+                <button class="btn-wasd" id="btn-left" data-tooltip="Esquerda (A)">
+                    <span class="arrow-icon">←</span>
+                    <span class="key-hint">A</span>
+                </button>
+                <button class="btn-wasd btn-center" id="btn-center" data-tooltip="Ação (X)">
+                    <span class="center-dot">●</span>
+                    <span class="key-hint">X</span>
+                </button>
+                <button class="btn-wasd" id="btn-right" data-tooltip="Direita (D)">
+                    <span class="arrow-icon">→</span>
+                    <span class="key-hint">D</span>
+                </button>
+
+                <!-- Linha 3: vazio, BAIXO, vazio -->
+                <div></div>
+                <button class="btn-wasd" id="btn-down" data-tooltip="Trás (S)">
+                    <span class="arrow-icon">↓</span>
+                    <span class="key-hint">S</span>
+                </button>
+                <div></div>
+            </div>
+        </div>
+
+        <!-- BOTÕES NUMÉRICOS -->
+        <div class="numbers-section">
+            <div class="section-title">
+                🔢 Comandos Numéricos
+                <span class="keyboard-hint">Teclado: 0-9</span>
+            </div>
+            <div class="num-grid">
+                <div class="num-row">
+                    <button class="btn-num" id="btn-7" data-tooltip="Número 7">7</button>
+                    <button class="btn-num" id="btn-8" data-tooltip="Número 8">8</button>
+                    <button class="btn-num" id="btn-9" data-tooltip="Número 9">9</button>
+                </div>
+                <div class="num-row">
+                    <button class="btn-num" id="btn-4" data-tooltip="Número 4">4</button>
+                    <button class="btn-num" id="btn-5" data-tooltip="Número 5">5</button>
+                    <button class="btn-num" id="btn-6" data-tooltip="Número 6">6</button>
+                </div>
+                <div class="num-row">
+                    <button class="btn-num" id="btn-1" data-tooltip="Número 1">1</button>
+                    <button class="btn-num" id="btn-2" data-tooltip="Número 2">2</button>
+                    <button class="btn-num" id="btn-3" data-tooltip="Número 3">3</button>
+                </div>
+                <div class="num-row">
+                    <button class="btn-num" id="btn-zero" data-tooltip="Número 0">0</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Botões de Conexão -->
+        <div class="action-buttons">
+            <button class="btn-action connect" id="connectBtn">🔗 Conectar</button>
+            <button class="btn-action disconnect" id="disconnectBtn" style="display: none;">⛔ Desconectar</button>
+            <button class="btn-action debug" id="debugBtn">🐞 Debug Android</button>
+        </div>
+
+        <!-- Painel de Logs -->
+        <div class="log-panel" id="logPanel">
+            <div class="log-entry"><span class="log-time">[Sistema]</span> <span class="log-icon">ℹ️</span> <span class="log-msg">Pronto. Clique em Conectar. Teclado WASD + números funcionando!</span></div>
+        </div>
+
+        <!-- Dicas para Android -->
+        <div class="android-tip">
+            <span>📱</span>
+            <span><strong>Dica Android:</strong> Se o comando não enviar, use o botão "Debug Android" acima. Mantenha a tela ativa (Wake Lock ativado).</span>
+        </div>
+
+        <div class="footer">
+            ⚡ Controle Micro:bit v2.1 | ⌨️ Teclado: WASD + Números | Compatível: Chrome/Edge (Android/Desktop) | Não funciona no iOS
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            // ---------- CONFIGURAÇÕES CRÍTICAS (NÃO ALTERAR) ----------
+            const UART_SERVICE_UUID = "6e400001-b5a3-f393-e0a9-e50e24dcca9e";
+            const UART_TX_CHARACTERISTIC_UUID = "6e400002-b5a3-f393-e0a9-e50e24dcca9e";
+            const UART_RX_CHARACTERISTIC_UUID = "6e400003-b5a3-f393-e0a9-e50e24dcca9e";
+
+            // ---------- ESTADO DA APLICAÇÃO ----------
+            let bluetoothDevice = null;
+            let rxCharacteristic = null;
+            let txCharacteristic = null;
+            let gattServer = null;
+            let commandQueue = Promise.resolve();
+            let wakeLock = null;
+
+            // ---------- ELEMENTOS DOM ----------
+            const statusArea = document.getElementById('statusArea');
+            const statusText = document.getElementById('statusText');
+            const connectBtn = document.getElementById('connectBtn');
+            const disconnectBtn = document.getElementById('disconnectBtn');
+            const debugBtn = document.getElementById('debugBtn');
+            const logPanel = document.getElementById('logPanel');
+
+            // Mapeamento de teclas para botões e comandos
+            const keyMap = {
+                'w': { buttonId: 'btn-up', command: 'w' },
+                'a': { buttonId: 'btn-left', command: 'a' },
+                's': { buttonId: 'btn-down', command: 's' },
+                'd': { buttonId: 'btn-right', command: 'd' },
+                'x': { buttonId: 'btn-center', command: 'x' },
+                '0': { buttonId: 'btn-zero', command: '0' },
+                '1': { buttonId: 'btn-1', command: '1' },
+                '2': { buttonId: 'btn-2', command: '2' },
+                '3': { buttonId: 'btn-3', command: '3' },
+                '4': { buttonId: 'btn-4', command: '4' },
+                '5': { buttonId: 'btn-5', command: '5' },
+                '6': { buttonId: 'btn-6', command: '6' },
+                '7': { buttonId: 'btn-7', command: '7' },
+                '8': { buttonId: 'btn-8', command: '8' },
+                '9': { buttonId: 'btn-9', command: '9' }
+            };
+
+            // ---------- FUNÇÕES DE LOG (MANTER) ----------
+            function addLog(message, type = 'info') {
+                const entry = document.createElement('div');
+                entry.className = 'log-entry';
+                const now = new Date();
+                const timeStr = `[${now.getHours().toString().padStart(2,'0')}:${now.getMinutes().toString().padStart(2,'0')}:${now.getSeconds().toString().padStart(2,'0')}]`;
+                
+                let icon = 'ℹ️';
+                if (type === 'success') icon = '✅';
+                if (type === 'error') icon = '❌';
+                if (type === 'warning') icon = '⚠️';
+                if (type === 'command') icon = '📤';
+                if (type === 'keyboard') icon = '⌨️';
+                
+                entry.innerHTML = `<span class="log-time">${timeStr}</span> <span class="log-icon">${icon}</span> <span class="log-msg">${message}</span>`;
+                logPanel.appendChild(entry);
+                logPanel.scrollTop = logPanel.scrollHeight;
+                
+                // Limitar logs
+                while (logPanel.children.length > 20) {
+                    logPanel.removeChild(logPanel.firstChild);
+                }
+            }
+
+            // ---------- FUNÇÃO DE ENVIO (CRÍTICA PARA ANDROID) ----------
+            function sendCommand(command, source = 'botão') {
+                return new Promise((resolve, reject) => {
+                    if (!rxCharacteristic) {
+                        addLog('Não conectado. Clique em Conectar primeiro.', 'error');
+                        return reject('Não conectado');
+                    }
+
+                    // Adiciona à fila para evitar sobrecarga
+                    commandQueue = commandQueue.then(() => {
+                        return (async () => {
+                            try {
+                                addLog(`Enviando comando: "${command}" (${source})`, 'command');
+                                
+                                // ANDROID: SEMPRE usar este método, NUNCA TextEncoder
+                                const bytes = [];
+                                for (let i = 0; i < command.length; i++) {
+                                    bytes.push(command.charCodeAt(i));
+                                }
+                                bytes.push(10); // newline (\n)
+                                const data = new Uint8Array(bytes);
+                                
+                                await rxCharacteristic.writeValue(data);
+                                
+                                return resolve();
+                            } catch (error) {
+                                addLog(`Erro ao enviar: ${error.message}`, 'error');
+                                return reject(error);
+                            }
+                        })();
+                    });
+
+                    // Tratar erros na fila
+                    commandQueue = commandQueue.catch(err => {
+                        addLog(`Fila de comandos: ${err.message}`, 'error');
+                    });
+                });
+            }
+
+            // ---------- FUNÇÃO PARA SIMULAR PRESSIONAMENTO DO BOTÃO ----------
+            function simulateButtonPress(buttonId) {
+                const button = document.getElementById(buttonId);
+                if (!button) return;
+                
+                // Adiciona classe de pressionamento
+                button.classList.add('key-press');
+                
+                // Remove após 100ms
+                setTimeout(() => {
+                    button.classList.remove('key-press');
+                }, 100);
+                
+                // Feedback visual extra (piscar verde)
+                button.classList.add('feedback-sent');
+                setTimeout(() => {
+                    button.classList.remove('feedback-sent');
+                }, 200);
+            }
+
+            // ---------- CONFIGURAR EVENTOS DE TECLADO ----------
+            function setupKeyboardEvents() {
+                document.addEventListener('keydown', (event) => {
+                    // Ignorar se estiver digitando em um input
+                    if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA') {
+                        return;
+                    }
+                    
+                    const key = event.key.toLowerCase();
+                    
+                    // Verificar se a tecla está mapeada
+                    if (keyMap.hasOwnProperty(key)) {
+                        event.preventDefault(); // Prevenir comportamento padrão (ex: rolar a página com WASD)
+                        
+                        const mapping = keyMap[key];
+                        
+                        // Simular pressionamento do botão
+                        simulateButtonPress(mapping.buttonId);
+                        
+                        // Enviar comando
+                        sendCommand(mapping.command, 'teclado').catch(err => {
+                            addLog(`Falha no envio por teclado: ${err}`, 'error');
+                        });
+                        
+                        addLog(`Tecla pressionada: ${key.toUpperCase()} -> comando "${mapping.command}"`, 'keyboard');
+                    }
+                });
+            }
+
+            // ---------- FUNÇÃO PARA PISCAR BOTÃO (FEEDBACK VISUAL) ----------
+            function flashButton(button) {
+                if (!button) return;
+                button.classList.add('feedback-sent');
+                setTimeout(() => {
+                    button.classList.remove('feedback-sent');
+                }, 200);
+            }
+
+            // ---------- CONFIGURAR EVENTOS DOS BOTÕES (15 COMANDOS) ----------
+            function setupButtonEvents() {
+                // WASD + Central
+                document.getElementById('btn-up').addEventListener('click', () => {
+                    sendCommand('w', 'botão');
+                    flashButton(document.getElementById('btn-up'));
+                });
+                document.getElementById('btn-left').addEventListener('click', () => {
+                    sendCommand('a', 'botão');
+                    flashButton(document.getElementById('btn-left'));
+                });
+                document.getElementById('btn-down').addEventListener('click', () => {
+                    sendCommand('s', 'botão');
+                    flashButton(document.getElementById('btn-down'));
+                });
+                document.getElementById('btn-right').addEventListener('click', () => {
+                    sendCommand('d', 'botão');
+                    flashButton(document.getElementById('btn-right'));
+                });
+                document.getElementById('btn-center').addEventListener('click', () => {
+                    sendCommand('x', 'botão');
+                    flashButton(document.getElementById('btn-center'));
+                });
+
+                // Números
+                document.getElementById('btn-1').addEventListener('click', () => {
+                    sendCommand('1', 'botão');
+                    flashButton(document.getElementById('btn-1'));
+                });
+                document.getElementById('btn-2').addEventListener('click', () => {
+                    sendCommand('2', 'botão');
+                    flashButton(document.getElementById('btn-2'));
+                });
+                document.getElementById('btn-3').addEventListener('click', () => {
+                    sendCommand('3', 'botão');
+                    flashButton(document.getElementById('btn-3'));
+                });
+                document.getElementById('btn-4').addEventListener('click', () => {
+                    sendCommand('4', 'botão');
+                    flashButton(document.getElementById('btn-4'));
+                });
+                document.getElementById('btn-5').addEventListener('click', () => {
+                    sendCommand('5', 'botão');
+                    flashButton(document.getElementById('btn-5'));
+                });
+                document.getElementById('btn-6').addEventListener('click', () => {
+                    sendCommand('6', 'botão');
+                    flashButton(document.getElementById('btn-6'));
+                });
+                document.getElementById('btn-7').addEventListener('click', () => {
+                    sendCommand('7', 'botão');
+                    flashButton(document.getElementById('btn-7'));
+                });
+                document.getElementById('btn-8').addEventListener('click', () => {
+                    sendCommand('8', 'botão');
+                    flashButton(document.getElementById('btn-8'));
+                });
+                document.getElementById('btn-9').addEventListener('click', () => {
+                    sendCommand('9', 'botão');
+                    flashButton(document.getElementById('btn-9'));
+                });
+                document.getElementById('btn-zero').addEventListener('click', () => {
+                    sendCommand('0', 'botão');
+                    flashButton(document.getElementById('btn-zero'));
+                });
+            }
+
+            // ---------- FUNÇÃO DE CONEXÃO (MANTER SEQUÊNCIA ORIGINAL) ----------
+            async function connectToMicrobit() {
+                try {
+                    addLog('Procurando micro:bit...', 'info');
+                    
+                    // 1. Solicitar dispositivo
+                    bluetoothDevice = await navigator.bluetooth.requestDevice({
+                        filters: [{ namePrefix: "BBC micro:bit" }],
+                        optionalServices: [UART_SERVICE_UUID]
+                    });
+
+                    addLog(`Encontrado: ${bluetoothDevice.name}`, 'success');
+                    
+                    // 2. Timeout para Android
+                    const timeout = /android/i.test(navigator.userAgent) ? 10000 : 5000;
+                    
+                    // 3. Conectar GATT
+                    gattServer = await bluetoothDevice.gatt.connect();
+                    
+                    // 4. Obter serviço UART
+                    const service = await gattServer.getPrimaryService(UART_SERVICE_UUID);
+                    
+                    // 5. PRIMEIRO: obter TX e ativar notificações (ORDEM CRÍTICA)
+                    txCharacteristic = await service.getCharacteristic(UART_TX_CHARACTERISTIC_UUID);
+                    await txCharacteristic.startNotifications();
+                    
+                    txCharacteristic.addEventListener('characteristicvaluechanged', (event) => {
+                        const value = event.target.value;
+                        const decoder = new TextDecoder('utf-8');
+                        const received = decoder.decode(value);
+                        addLog(`Recebido: ${received}`, 'info');
+                    });
+                    
+                    // 6. DEPOIS: obter RX
+                    rxCharacteristic = await service.getCharacteristic(UART_RX_CHARACTERISTIC_UUID);
+                    
+                    // 7. AQUECIMENTO CRÍTICO PARA ANDROID
+                    const warmBytes = new Uint8Array([10]); // \n
+                    await rxCharacteristic.writeValue(warmBytes);
+                    addLog('Byte de aquecimento enviado (\\n)', 'success');
+                    
+                    // Atualizar UI
+                    statusArea.classList.add('connected');
+                    statusText.innerText = 'Conectado';
+                    connectBtn.style.display = 'none';
+                    disconnectBtn.style.display = 'flex';
+                    
+                    addLog('✅ Conectado e pronto! Teclado funcionando!', 'success');
+                    
+                } catch (error) {
+                    addLog(`Erro conexão: ${error.message}`, 'error');
+                    disconnectFromMicrobit();
+                }
+            }
+
+            // ---------- DESCONECTAR ----------
+            function disconnectFromMicrobit() {
+                if (gattServer && gattServer.connected) {
+                    gattServer.disconnect();
+                }
+                bluetoothDevice = null;
+                rxCharacteristic = null;
+                txCharacteristic = null;
+                gattServer = null;
+                
+                statusArea.classList.remove('connected');
+                statusText.innerText = 'Desconectado';
+                connectBtn.style.display = 'flex';
+                disconnectBtn.style.display = 'none';
+                addLog('Desconectado.', 'warning');
+            }
+
+            // ---------- WAKE LOCK (MANTER TELA ATIVA NO ANDROID) ----------
+            async function requestWakeLock() {
+                try {
+                    if ('wakeLock' in navigator) {
+                        wakeLock = await navigator.wakeLock.request('screen');
+                        addLog('Wake Lock ativado (tela não desliga)', 'success');
+                        
+                        wakeLock.addEventListener('release', () => {
+                            addLog('Wake Lock liberado', 'info');
+                        });
+                    }
+                } catch (err) {
+                    addLog(`Wake Lock: ${err.message}`, 'warning');
+                }
+            }
+
+            // ---------- DEBUG ANDROID ----------
+            function debugAndroid() {
+                addLog('🔧 DEBUG ANDROID', 'info');
+                addLog(`User Agent: ${navigator.userAgent}`, 'info');
+                addLog(`Web Bluetooth: ${'bluetooth' in navigator ? 'Sim' : 'Não'}`, 'info');
+                addLog(`Wake Lock API: ${'wakeLock' in navigator ? 'Sim' : 'Não'}`, 'info');
+                
+                if (bluetoothDevice) {
+                    addLog(`Dispositivo: ${bluetoothDevice.name}`, 'info');
+                    addLog(`Conectado: ${gattServer && gattServer.connected ? 'Sim' : 'Não'}`, 'info');
+                } else {
+                    addLog('Nenhum dispositivo conectado', 'warning');
+                }
+                
+                // Teste de teclado
+                addLog('Teste: Pressione W A S D X ou números no teclado', 'keyboard');
+            }
+
+            // ---------- INICIALIZAÇÃO ----------
+            window.addEventListener('load', () => {
+                setupButtonEvents();
+                setupKeyboardEvents(); // ATIVAR SUPORTE A TECLADO
+                
+                connectBtn.addEventListener('click', async () => {
+                    await requestWakeLock();
+                    await connectToMicrobit();
+                });
+                
+                disconnectBtn.addEventListener('click', disconnectFromMicrobit);
+                debugBtn.addEventListener('click', debugAndroid);
+                
+                // Detectar iOS e mostrar mensagem
+                const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+                if (isIOS) {
+                    addLog('⚠️ iOS detectado: Web Bluetooth não é suportado.', 'error');
+                }
+                
+                addLog('✅ Suporte a teclado ativado! Pressione W A S D, X e números.', 'success');
+            });
+
+            // Liberar wake lock quando a página for ocultada
+            document.addEventListener('visibilitychange', async () => {
+                if (wakeLock && document.visibilityState === 'visible') {
+                    wakeLock = await navigator.wakeLock.request('screen');
+                }
+            });
+
+        })();
+    </script>
+</body>
+</html>
